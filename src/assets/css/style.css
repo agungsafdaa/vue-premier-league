@@ -1,0 +1,80 @@
+
+#app{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+
+.img-logo{
+    width: 100px;
+}
+
+a{
+    color:#000;
+}
+.router-link-exact-active{
+    font-weight: bold;
+}
+
+.btn-success, .badge-success{
+    background-color: #c633c5;
+    border-color: #c334cc;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #c134ce;
+    border-color: #37003c;
+}
+
+.mt-70{
+    margin-top:70px;
+}
+
+.mb-10{
+    margin-bottom:10px;
+}
+
+.mt-10{
+    margin-top:10px;
+}
+
+.card{
+    padding: 20px;
+    border-top: 3px solid red;
+    /* border: none; */
+    border-radius: 15px;
+    box-shadow:0 2px 4px rgba(0,0,0,.2);
+    
+}
+
+.card-img-top{
+    border-top-right-radius:35px;
+    
+}
+
+
+.breadcrumb{
+    background:transparent;
+}
+
+.br-15{
+    border-radius:15px;
+}
+
+
+.bg{
+    
+    background: #f22a90;
+}
+
+.hero-heading{
+    position: relative;
+    top: 200px;
+}
+
+.background-image{
+    background:url(../images/hero.webp);
+    min-height: 616px;
+    background-position-x: 594px;
+    background-repeat: no-repeat;
+}
