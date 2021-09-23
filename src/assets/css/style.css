@@ -86,3 +86,9 @@ a{
     background-position-x: 594px;
     background-repeat: no-repeat;
 }
+
+@media only screen and (max-width: 600px) {
+   .background-image{
+    background-position: -171px 70px; 
+   }
+}
