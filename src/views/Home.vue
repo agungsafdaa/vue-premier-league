@@ -1,50 +1,48 @@
 <template>
   <div class="home">
     <Navbar />
-       <Hero />
+    <Hero />
     <div class="container">
-   
       <div class="row mt-70">
         <div class="col-md">
-          <h2>No Rooms For <strong>Racism</strong></h2>
+          <h4>No Rooms For <strong>Racism</strong></h4>
         </div>
-     
       </div>
 
       <div class="row mb-3">
         <div
-          class="col-md-4 mt-4"
+          class="col-md-3 mt-4"
           v-for="standings in standings"
           :key="standings.stage"
         >
-          <h4>Klasemen Sementara</h4>
-          <div class="table mt-3">
+          <h6>Klasemen Sementara</h6>
+          <div class="card table  mt-3">
             <table class="table table-sm">
               <thead>
                 <tr>
-                  <th scope="col">Position</th>
-                  <th scope="col">Club</th>
-                  <th scope="col">Pl</th>
-                  <th scope="col">GD</th>
-                  <th scope="col">Pts</th>
+                  <th><p>Position</p></th>
+                  <th><p>Club</p></th>
+               
+                  <th><p>Pts</p></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="tables in standings.table" :key="tables.position">
                   <td>{{ tables.position }}</td>
                   <td>
-                    <img
-                      class="img-fluid"
+                    <div class="media">
+  <img
+                      class="mr-3 img-fluid"
                       :src="'' + tables.team.crestUrl"
-                      style="width: 35px"
+                      style="width: 15px"
                     />
-                    <strong> {{ tables.team.name }}</strong>
+                    </div>
+                  
+                   <div class="media-body">
+                      <h6>  {{ tables.team.name }}</h6>
+                   </div>
                   </td>
 
-                  <td>{{ tables.playedGames }}</td>
-                  <td>
-                    <strong> {{ tables.goalDifference }}</strong>
-                  </td>
                   <td>
                     <strong> {{ tables.points }}</strong>
                   </td>
@@ -53,26 +51,60 @@
             </table>
           </div>
         </div>
-        <div class="col-md-8">
-           <div class="row mt-70">
-        <div class="col-md">
-          <h6>Pertandingan <strong>Selanjutnya</strong></h6>
-        </div>
-        <div class="col-md">
-          <router-link to="/foods" class="btn btn-md btn-success float-right"
-            ><b-icon-list></b-icon-list>Lihat Semua</router-link
-          >
-        </div>
-      </div>
-          <div class="row  mt-10">
+        <div class="col-md-9">
+          <!-- pertandingan berakhir -->
+                     <div class="row mt-70">
+            <div class="col-md">
+              <h6>Pertandingan <strong>Terakhir</strong></h6>
+            </div>
+            <div class="col-md">
+              <router-link
+                to="/foods"
+                class="btn btn-md btn-success float-right"
+                >Lihat Semua <b-icon-eye></b-icon-eye
+              ></router-link>
+            </div>
+          </div>
+          <div class="row mt-10">
             <div
               class="col-md-6 mb-10"
-              v-for="matched in peopleShowed"
+              v-for="matched in finishShowed"
               :key="matched.id"
             >
               <div class="card">
-                <p>{{ matched.awayTeam.name }} vs {{ matched.homeTeam.name }}</p>
-                <p>{{matched.utcDate}}</p>
+                <p>
+                  {{ matched.awayTeam.name }} <span class="matchScore">  {{matched.score.fullTime.awayTeam}}</span> vs  <span class="matchScore">  {{matched.score.fullTime.homeTeam}}</span> {{ matched.homeTeam.name }}
+                </p>
+                <p>{{ matched.utcDate }}</p>
+              </div>
+            </div>
+          </div>
+
+            <!-- end -->
+          <div class="row mt-70">
+            <div class="col-md">
+              <h6>Pertandingan <strong>Selanjutnya</strong></h6>
+            </div>
+            <div class="col-md">
+              <router-link
+                to="/foods"
+                class="btn btn-md btn-success float-right"
+                >Lihat Semua <b-icon-eye></b-icon-eye
+              ></router-link>
+            </div>
+          </div>
+        
+          <div class="row mt-10">
+            <div
+              class="col-md-6 mb-10"
+              v-for="matched in matchShowed"
+              :key="matched.id"
+            >
+              <div class="card">
+                <p>
+                  {{ matched.awayTeam.name }} vs  {{ matched.homeTeam.name }}
+                </p>
+                <p>{{ matched.utcDate }}</p>
               </div>
             </div>
           </div>
@@ -109,13 +141,17 @@ export default {
       tables: [],
       team: [],
       matches: [],
-      finished:[],
+      finished: [],
       limit: 6,
+      finish:4
     };
   },
   computed: {
-    peopleShowed() {
+    matchShowed() {
       return this.matches.filter((el, index) => index < this.limit);
+    },
+    finishShowed() {
+      return this.finished.filter((el, index) => index < this.finish);
     },
   },
   methods: {
@@ -124,6 +160,9 @@ export default {
     },
     setMatches(data) {
       this.matches = data;
+    },
+    setFinish(data) {
+      this.finished = data;
     },
   },
 
@@ -154,14 +193,14 @@ export default {
       )
       // handle success
       .catch((error) => console.log(error));
-      axios
+    axios
       .get(
         "https://api.football-data.org/v2/competitions/2021/matches?status=FINISHED",
         { headers }
       )
       .then(
         (response) =>
-          console.log(response.data)
+          console.log(response.data) + this.setFinish(response.data.matches)
       )
       // handle success
       .catch((error) => console.log(error));

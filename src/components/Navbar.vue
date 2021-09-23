@@ -7,19 +7,19 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
+          <b-navbar-nav class="ml-auto">
             <li class="nav-item">
               <router-link class="nav-link" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/foods">Foods</router-link>
+              <router-link class="nav-link" to="/foods">Klasemen</router-link>
+            </li>
+              <li class="nav-item">
+              <router-link class="nav-link" to="/foods">Jadwal</router-link>
             </li>
           </b-navbar-nav>
 
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
            
-          </b-navbar-nav>
         </b-collapse>
       </div>
     </b-navbar>

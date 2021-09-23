@@ -20,6 +20,14 @@ a{
     border-color: #c334cc;
 }
 
+.matchScore{
+    
+    background: #37003c;
+    color: white;
+    padding: 1px 10px;
+
+}
+
 .btn-success:hover {
     color: #fff;
     background-color: #c134ce;
